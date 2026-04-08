@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('agendamentos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_cliente')
+                ->constrained('clientes')
+                ->onDelete('cascade');
+            $table->foreignId('id_servico')
+                ->constrained('servicos')
+                ->onDelete('cascade');
+            $table->foreignId('id_barbeiro')
+                ->constrained('barbeiros')
+                ->onDelete('cascade');
+            $table->date('data');
+            $table->time('hora');
+            $table->string('status', 20);
             $table->timestamps();
         });
     }

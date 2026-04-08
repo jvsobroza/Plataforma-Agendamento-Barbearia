@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agendamento extends Model
 {
-    use HasFactory;
+    protected $fillable = ['id_servico', 'id_barbeiro', 'id_cliente', 'data', 'status'];
+
+    public function servico(){
+        return $this->belongsTo(Servico::class, 'id_servico', 'id');
+    }
+
+    public function barbeiro(){
+        return $this->belongsTo(Barbeiro::class, 'id_barbeiro', 'id');
+    }
+
+    public function cliente(){
+        return $this->belongsTo(Cliente::class, 'id_cliente', 'id');
+    }
 }

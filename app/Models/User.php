@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nome',
         'email',
         'password',
+        'tipo',
     ];
 
     /**
@@ -41,4 +42,10 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+    public function clientes(){
+        return $this->hasMany(Cliente::class, 'id_usuario', 'id');
+    }
+    public function barbeiros(){
+        return $this->hasMany(Barbeiro::class, 'id_usuario', 'id');
+    }
 }
