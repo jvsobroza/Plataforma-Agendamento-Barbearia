@@ -43,9 +43,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
     public function clientes(){
-        return $this->hasMany(Cliente::class, 'id_usuario', 'id');
+        return $this->hasOne(Cliente::class, 'id_usuario', 'id');
     }
     public function barbeiros(){
-        return $this->hasMany(Barbeiro::class, 'id_usuario', 'id');
+        return $this->hasOne(Barbeiro::class, 'id_usuario', 'id');
     }
 }
