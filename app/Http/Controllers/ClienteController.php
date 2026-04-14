@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use App\Models\User;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $cliente = Cliente::latest()->paginate(5);
+        return view('cliente.index', compact('cliente'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -21,7 +20,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::all();
+        return view('cliente.create', compact('user'));
     }
 
     /**
@@ -29,7 +29,8 @@ class ClienteController extends Controller
      */
     public function store(StoreClienteRequest $request)
     {
-        //
+        Cliente::create($request->all());
+        return redirect()->route('cliente.index');
     }
 
     /**
@@ -37,30 +38,37 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return view('cliente.show', compact('cliente'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $user = User::all();
+        return view('cliente.edit', compact('cliente', 'user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClienteRequest $request, Cliente $cliente)
+    public function update(UpdateClienteRequest $request, $id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $cliente->update($request->all());
+
+
+        return redirect()->route('cliente.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        Cliente::destroy($id);
+        return redirect()->route('cliente.index');
     }
 }
