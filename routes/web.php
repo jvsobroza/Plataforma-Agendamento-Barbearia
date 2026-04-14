@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::resource('clientes', ClienteController::class);
-Route::resource('barbeiros', BarbeiroController::class);
-Route::resource('servicos', ServicoController::class);
-Route::resource('agendamentos', AgendamentoController::class);
-Route::resource('users', UserController::class);
+Route::resource('cliente', ClienteController::class);
+Route::resource('barbeiro', BarbeiroController::class);
+Route::resource('servico', ServicoController::class);
+Route::resource('agendamento', AgendamentoController::class);
+Route::resource('user', UserController::class);
 Route::get('/', function () {
     return view('welcome');
 });
