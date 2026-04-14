@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -28,7 +29,28 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        User::create($request->all());
+        DB::transaction(function () use ($request) {
+        
+        $user = User::create([
+            'nome' => $request->nome,
+            'email' => $request->email,
+            'password' => $request->password,
+            'tipo' => $request->tipo,
+        ]);
+        if ($user->tipo == 1) { //barbeiro
+            $request->validate(['telefone' => 'required|string']);
+            $user->barbeiro()->create([
+                'telefone' => $request->telefone,
+            ]);
+        } 
+        else
+            if ($user->tipo == 2) {//Cliente
+            $request->validate(['endereco' => 'required|string']);
+            $user->cliente()->create([
+                'endereco' => $request->endereco,
+            ]);
+        }
+    });
         return redirect()->route('user.index');
     }
 

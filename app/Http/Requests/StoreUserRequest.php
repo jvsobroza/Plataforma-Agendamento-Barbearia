@@ -26,6 +26,8 @@ class StoreUserRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|max:255',
             'tipo' => 'required|integer|in:1,2',
+            'telefone' => 'required_if:tipo,1|string|max:20',
+            'endereco' => 'required_if:tipo,2|string|max:255',
         ];
     }
 }
