@@ -39,14 +39,14 @@ class UserController extends Controller
         ]);
         if ($user->tipo == 1) { //barbeiro
             $request->validate(['telefone' => 'required|string']);
-            $user->barbeiro()->create([
+            $user->barbeiros()->create([
                 'telefone' => $request->telefone,
             ]);
         } 
         else
             if ($user->tipo == 2) {//Cliente
             $request->validate(['endereco' => 'required|string']);
-            $user->cliente()->create([
+            $user->clientes()->create([
                 'endereco' => $request->endereco,
             ]);
         }
