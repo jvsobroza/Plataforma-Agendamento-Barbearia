@@ -22,7 +22,8 @@ class UpdateClienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'endereco' => 'required|string|min:10|max:150',
+            'id_usuario' => 'required|exists:users,id',
         ];
     }
 }

@@ -22,7 +22,8 @@ class UpdateBarbeiroRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'telefone' => 'required|string|min:10|max:22',
+            'id_usuario' => 'required|exists:users,id',
         ];
     }
 }

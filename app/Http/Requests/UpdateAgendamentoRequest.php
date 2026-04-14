@@ -22,7 +22,12 @@ class UpdateAgendamentoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id_servico' => 'required|exists:servicos,id',
+            'id_barbeiro' => 'required|exists:barbeiros,id',
+            'id_cliente' => 'required|exists:clientes,id',
+            'data' => 'required|date|after_or_equal:today',
+            'hora' => 'required|date_format:H:i',
+            'status' => 'required|string|max:20',
         ];
     }
 }
