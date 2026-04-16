@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Barbeiro extends Model
 {
+    protected $table = 'barbeiros';
     protected $fillable = ['telefone', 'id_usuario'];
 
     public function usuario()

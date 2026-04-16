@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'tipo',
+        'telefone',
+        'endereco',
     ];
 
     /**
@@ -42,10 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
-    public function clientes(){
+    public function clientes()
+    {
         return $this->hasOne(Cliente::class, 'id_usuario', 'id');
     }
-    public function barbeiros(){
+    public function barbeiros()
+    {
         return $this->hasOne(Barbeiro::class, 'id_usuario', 'id');
     }
 }
