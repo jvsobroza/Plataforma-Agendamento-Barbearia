@@ -22,10 +22,9 @@ class StoreServicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'duracao' => 'required|date_format:H:i',
+            'duracao' => 'required|integer|min:1|max:600',
             'preco' => 'required|numeric|min:0',
             'descricao' => 'required|string|min:5|max:150',
-            'id_barbeiro' => 'required|exists:barbeiros,id',
         ];
     }
 }

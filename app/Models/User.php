@@ -44,11 +44,11 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
-    public function clientes()
+    public function cliente()
     {
         return $this->hasOne(Cliente::class, 'id_usuario', 'id');
     }
-    public function barbeiros()
+    public function barbeiro()
     {
         return $this->hasOne(Barbeiro::class, 'id_usuario', 'id');
     }
