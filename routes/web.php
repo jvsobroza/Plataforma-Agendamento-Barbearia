@@ -39,7 +39,13 @@ Route::post('/login', function (Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        return redirect()->intended('/');
+        $user = Auth::user();
+
+        if ($user->tipo == 1) {
+            return redirect()->intended('/barbeiro/');
+        } else {
+            return redirect()->intended('/area-do-cliente');
+        }
     }
 
     return back()->withErrors([
@@ -79,14 +85,14 @@ Route::post('/logout', function (Request $request) {
 
 Route::middleware([CheckBarbeiro::class])->group(function () {
     Route::get('/barbeiro', function () {
-        return view('barbeiro');
+        return view('barbeiro.index');
     });
     Route::resource('servico', ServicoController::class);
     Route::resource('agendamento', AgendamentoController::class)->except(['create', 'store']);
 });
 Route::middleware([CheckCliente::class])->group(function () {
     Route::get('/cliente', function () {
-        return view('cliente');
+        return view('cliente.index');
     });
     Route::resource('agendamento', AgendamentoController::class)->only(['create', 'store', 'index', 'show', 'destroy']);
 });
