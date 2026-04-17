@@ -12,6 +12,8 @@ use App\Models\Barbeiro;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Models\Servico;
+use App\Models\Agendamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -85,7 +87,13 @@ Route::post('/logout', function (Request $request) {
 
 Route::middleware([CheckBarbeiro::class])->group(function () {
     Route::get('/barbeiro', function () {
-        return view('barbeiro.index');
+        $meuId = Auth::user()->id;
+        $servicos = Servico::where('id_barbeiro', $meuId)->get();
+        $agendamentos = Agendamento::where('id_barbeiro', $meuId)->get();
+        return view('barbeiro.index', [
+            'servicos' => $servicos,
+            'agendamentos' => $agendamentos
+        ]);
     });
     Route::resource('servico', ServicoController::class);
     Route::resource('agendamento', AgendamentoController::class)->except(['create', 'store']);
