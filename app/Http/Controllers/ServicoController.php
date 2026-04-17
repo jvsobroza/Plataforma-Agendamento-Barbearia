@@ -6,14 +6,20 @@ use App\Models\Servico;
 use App\Http\Requests\StoreServicoRequest;
 use App\Http\Requests\UpdateServicoRequest;
 use App\Models\Barbeiro;
+use App\Models\Agendamento;
 use Illuminate\Support\Facades\Auth;
 
 class ServicoController extends Controller
 {
     public function index()
     {
-        $servico = Servico::latest()->paginate(5);
-        return view('servico.index', compact('servico'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $barbeiro = Auth::user()->barbeiro;
+        $servicos = Servico::where('id_barbeiro', $barbeiro->id)->get();
+        $agendamentos = Agendamento::where('id_barbeiro', $barbeiro->id)->get();
+        return view('Barbeiro.index', [
+            'servicos' => $servicos,
+            'agendamentos' => $agendamentos
+        ]);
     }
 
     /**

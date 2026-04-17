@@ -87,9 +87,9 @@ Route::post('/logout', function (Request $request) {
 
 Route::middleware([CheckBarbeiro::class])->group(function () {
     Route::get('/barbeiro', function () {
-        $meuId = Auth::user()->id;
-        $servicos = Servico::where('id_barbeiro', $meuId)->get();
-        $agendamentos = Agendamento::where('id_barbeiro', $meuId)->get();
+        $barbeiro = Auth::user()->barbeiro;
+        $servicos = Servico::where('id_barbeiro', $barbeiro->id)->get();
+        $agendamentos = Agendamento::where('id_barbeiro', $barbeiro->id)->get();
         return view('barbeiro.index', [
             'servicos' => $servicos,
             'agendamentos' => $agendamentos

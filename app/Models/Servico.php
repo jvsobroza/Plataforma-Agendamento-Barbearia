@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Servico extends Model
 {
+    protected $table = 'servicos';
     protected $fillable = ['duracao', 'preco', 'descricao', 'id_barbeiro'];
 
     public function barbeiro(){
