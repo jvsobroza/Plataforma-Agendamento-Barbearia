@@ -70,12 +70,10 @@ class AgendamentoController extends Controller
         $user = Auth::user();
 
         if ($user->tipo == 1) {
-            // Barbeiro: verifica se o agendamento pertence a ele
             if ($user->barbeiro->id !== $agendamento->id_barbeiro) {
                 return redirect()->back()->with('erro', 'Você não tem permissão!');
             }
         } else {
-            // Cliente: verifica se o agendamento pertence a ele
             if ($user->cliente->id !== $agendamento->id_cliente) {
                 return redirect()->back()->with('erro', 'Você não tem permissão!');
             }
@@ -101,9 +99,9 @@ class AgendamentoController extends Controller
      */
     public function update(UpdateAgendamentoRequest $request, Agendamento $agendamento)
     {
-        $agendamento->update($request->validated());
+        $agendamento->update(['status' => $request->status]);
 
-        return redirect()->route('barbeiro.agendamento.index');
+        return redirect()->route('barbeiro.index', $agendamento->id);
     }
     /**
      * Remove the specified resource from storage.
