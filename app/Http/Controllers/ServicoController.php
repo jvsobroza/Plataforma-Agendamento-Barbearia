@@ -44,7 +44,7 @@ class ServicoController extends Controller
             'preco' => $request->preco,
             'duracao' => $tempoF,
         ]);
-        return redirect()->route('barbeiro.servico.index');
+        return redirect()->route('barbeiro.index');
     }
 
     /**
@@ -79,7 +79,7 @@ class ServicoController extends Controller
             'preco' => $request->preco,
             'duracao' => $tempoF,
         ]);
-        return redirect()->route('barbeiro.servico.index');
+        return redirect()->route('barbeiro.index');
     }
 
     /**

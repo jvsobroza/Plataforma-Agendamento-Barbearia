@@ -54,7 +54,7 @@ class AgendamentoController extends Controller
         }
 
         Agendamento::create($dados);
-        return redirect()->route('cliente.agendamento.index');
+        return redirect()->route('cliente.index');
     }
     /**
      * Display the specified resource.
