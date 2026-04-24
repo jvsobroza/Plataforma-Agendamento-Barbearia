@@ -46,7 +46,7 @@ Route::post('/login', function (Request $request) {
         if ($user->tipo == 1) {
             return redirect()->intended('/barbeiro/');
         } else {
-            return redirect()->intended('/area-do-cliente');
+            return redirect()->intended('/cliente/');
         }
     }
 
@@ -100,7 +100,11 @@ Route::middleware([CheckBarbeiro::class])->group(function () {
 });
 Route::middleware([CheckCliente::class])->group(function () {
     Route::get('/cliente', function () {
-        return view('cliente.index');
+        $cliente = Auth::user()->cliente;
+        $agendamentos = Agendamento::where('id_cliente', $cliente->id)->get();
+        return view('cliente.index', [
+            'agendamentos' => $agendamentos
+        ]);
     });
     Route::resource('agendamento', AgendamentoController::class)->only(['create', 'store', 'index', 'show', 'destroy']);
 });
