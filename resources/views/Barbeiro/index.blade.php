@@ -1,5 +1,4 @@
 @extends('Barbeiro.layout')
-
 @section('content')
     <div class="page-content container-fluid py-3">
 
@@ -25,7 +24,7 @@
                 </h5>
                 <div class="d-flex align-items-center gap-3">
                     <span class="badge bg-primary rounded-pill">{{ count($servicos) }} serviços</span>
-                    <a href="{{ route('servico.create') }}" class="btn btn-success btn-sm fw-bold shadow-sm">
+                    <a href="{{ route('barbeiro.servico.create') }}" class="btn btn-success btn-sm fw-bold shadow-sm">
                         <i class="fas fa-plus me-1"></i> Adicionar Novo Serviço
                     </a>
                 </div>
@@ -47,49 +46,54 @@
                                 </thead>
                                 <tbody>
                     @endif
-                                    <tr class="align-middle">
-                                        <td class="text-center fw-bold text-primary">{{ $loop->iteration }}</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar rounded-circle bg-info text-white d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px; flex-shrink: 0;">
-                                                    <i class="fas fa-cut small"></i>
-                                                </div>
-                                                <span class="fw-500">{{ $servico->descricao }}</span>
+                                <tr class="align-middle">
+                                    <td class="text-center fw-bold text-primary">{{ $loop->iteration }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar rounded-circle bg-info text-white d-flex align-items-center justify-content-center me-3"
+                                                style="width: 35px; height: 35px; flex-shrink: 0;">
+                                                <i class="fas fa-cut small"></i>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-light text-dark border">
-                                                R$ {{ number_format($servico->preco, 2, ',', '.') }}
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="badge bg-light text-primary">
-                                                {{ explode(':', $servico->duracao)[1] }} min
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <form action="{{ route('servico.destroy', $servico->id) }}" method="POST" class="d-inline">
-                                                <div class="d-flex flex-wrap justify-content-center gap-2">
-                                                    <a class="btn btn-sm btn-outline-info" href="{{ route('servico.show', $servico->id) }}" title="Visualizar">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <a class="btn btn-sm btn-outline-primary" href="{{ route('servico.edit', $servico->id) }}" title="Editar">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir este serviço?')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </td>
-                                    </tr>
-                    @if ($loop->last)
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
+                                            <span class="fw-500">{{ $servico->descricao }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">
+                                            R$ {{ number_format($servico->preco, 2, ',', '.') }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-light text-primary">
+                                            {{ explode(':', $servico->duracao)[1] }} min
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <form action="{{ route('barbeiro.servico.destroy', $servico->id) }}" method="POST"
+                                            class="d-inline">
+                                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                                <a class="btn btn-sm btn-outline-info"
+                                                    href="{{ route('barbeiro.servico.show', $servico->id) }}" title="Visualizar">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a class="btn btn-sm btn-outline-primary"
+                                                    href="{{ route('barbeiro.servico.edit', $servico->id) }}" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir"
+                                                    onclick="return confirm('Tem certeza que deseja excluir este serviço?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @if ($loop->last)
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                 @empty
                     <div class="text-center py-5">
                         <i class="fas fa-cut text-secondary" style="font-size: 3rem;"></i>
@@ -126,33 +130,34 @@
                                 </thead>
                                 <tbody>
                     @endif
-                                    <tr>
-                                        <td class="ps-4 fw-medium">
-                                            <i class="fas fa-user-circle text-muted me-2"></i>{{ $agenda->cliente->user->nome ?? 'Cliente' }}
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-secondary">{{ $agenda->servico->descricao ?? 'Serviço' }}</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-dark">
-                                                <i class="far fa-calendar-alt text-muted me-1"></i>
-                                                {{ $agenda->data_hora }}
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="badge rounded-pill bg-info text-dark">{{ $agenda->status }}</span>
-                                        </td>
-                                        <td class="text-end pe-4">
-                                            <a href="{{ route('agendamento.show', $agenda->id) }}" class="btn btn-sm btn-outline-info">
-                                                <i class="fas fa-eye me-1"></i> Detalhes
-                                            </a>
-                                        </td>
-                                    </tr>
-                    @if ($loop->last)
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
+                                <tr>
+                                    <td class="ps-4 fw-medium">
+                                        <i class="fas fa-user-circle text-muted me-2"></i>{{ $agenda->cliente->usuario->nome}}
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">{{ $agenda->servico->descricao}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-dark">
+                                            <i class="far fa-calendar-alt text-muted me-1"></i>
+                                            {{ date('d/m/Y', strtotime($agenda->data)) }}
+                                            {{ date('H:i', strtotime($agenda->hora)) }} </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge rounded-pill bg-info text-dark">{{ $agenda->status }}</span>
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <a href="{{ route('barbeiro.agendamento.show', $agenda->id) }}"
+                                            class="btn btn-sm btn-outline-info">
+                                            <i class="fas fa-eye me-1"></i> Detalhes
+                                        </a>
+                                    </td>
+                                </tr>
+                                @if ($loop->last)
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                 @empty
                     <div class="text-center py-5 text-muted">
                         <i class="far fa-calendar-times fs-1 d-block mb-2 text-secondary"></i>

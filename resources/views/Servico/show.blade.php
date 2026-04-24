@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-content container-fluid py-3">
-        <a href="{{ route('servico.index') }}" class="btn btn-outline-secondary mb-4">
+        <a href="{{ route('barbeiro.index') }}" class="btn btn-outline-secondary mb-4">
             <i class="fas fa-arrow-left me-1"></i> Voltar ao Painel principal
         </a>
         <div class="mb-4 d-flex justify-content-between align-items-center">
@@ -27,12 +27,12 @@
                 <p class="card-text mb-4">{{ explode(':', $servico->duracao)[1] }} minutos</p>
 
                 <div class="d-grid">
-                    <a href="{{ route('servico.edit', $servico->id) }}" class="btn btn-primary btn-lg">
+                    <a href="{{ route('barbeiro.servico.edit', $servico->id) }}" class="btn btn-primary btn-lg">
                         <i class="fas fa-edit me-2"></i> Editar Serviço
                     </a>
                 </div>
                 <div class="d-grid mt-3">
-                    <a href="{{ route('servico.destroy', $servico->id) }}" class="btn btn-danger btn-lg" onclick="event.preventDefault(); if(confirm('Tem certeza que deseja apagar este serviço?')) { document.getElementById('delete-form').submit(); }">
+                    <a href="{{ route('barbeiro.servico.destroy', $servico->id) }}" class="btn btn-danger btn-lg" onclick="event.preventDefault(); if(confirm('Tem certeza que deseja apagar este serviço?')) { document.getElementById('delete-form').submit(); }">
                         <i class="fas fa-trash-alt me-2"></i> Apagar Serviço
                     </a>
                 </div>

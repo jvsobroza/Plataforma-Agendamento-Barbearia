@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-content container-fluid py-3">
-        <a href="{{ route('servico.index') }}" class="btn btn-outline-secondary mb-4">
+        <a href="{{ route('barbeiro.index') }}" class="btn btn-outline-secondary mb-4">
             <i class="fas fa-arrow-left me-1"></i> Voltar ao Painel principal
         </a>
         <div class="mb-4 d-flex justify-content-between align-items-center">
@@ -18,7 +18,7 @@
         <div class="card shadow-sm border-0" style="max-width: 600px;">
             <div class="card-body p-4">
 
-                <form action="{{ route('servico.update', $servico->id) }}" method="POST">
+                <form action="{{ route('barbeiro.servico.update', $servico->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
