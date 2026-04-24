@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <title>Barbearia Xurupis</title>
 </head>
@@ -13,10 +14,11 @@
     <nav class="nav navbar navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand nav-logo" href="#">
-                <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis" class="rounded-circle"></div>
+                <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis"
+                        class="rounded-circle"></div>
                 <span class="logo-name">XURUPIS</span>
             </a>
-            <a href="{{ url('/login') }}" class="nav-cta text-decoration-none">Login / Cadastro</a>
+                <a href="{{ route('login') }}" class="nav-cta text-decoration-none">Login / Cadastro</a>
         </div>
     </nav>
 
@@ -122,32 +124,35 @@
     <footer class="footer">
         <div class="container">
             <div class="row mb-5">
-            <div class="col-md-6">
-                <div class="footer-col-title">Localização</div>
-                <div class="footer-map"><span>— Jaguari / Santa Maria, RS —</span></div>
-                <div class="footer-text" style="margin-top: 10px">
-                    Rua Olavo, 123<br />Centro — RS
+                <div class="col-md-6">
+                    <div class="footer-col-title">Localização</div>
+                    <div class="footer-map"><span>— Jaguari / Santa Maria, RS —</span></div>
+                    <div class="footer-text" style="margin-top: 10px">
+                        Rua Olavo, 123<br />Centro — RS
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-col-title">Horários</div>
+                    <div class="footer-text">
+                        Seg – Sex &nbsp;&nbsp; 09h às 20h<br />
+                        Sábado &nbsp;&nbsp;&nbsp;&nbsp; 09h às 18h<br />
+                        Domingo &nbsp;&nbsp; Fechado
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="footer-col-title">Horários</div>
-                <div class="footer-text">
-                    Seg – Sex &nbsp;&nbsp; 09h às 20h<br />
-                    Sábado &nbsp;&nbsp;&nbsp;&nbsp; 09h às 18h<br />
-                    Domingo &nbsp;&nbsp; Fechado
-                </div>
-            </div>
-        </div>
             <div class="footer-bottom d-flex justify-content-between align-items-center">
                 <div class="nav-logo">
-                    <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis" class="rounded-circle"></div>
+                    <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis"
+                            class="rounded-circle"></div>
                     <span class="logo-name">XURUPIS</span>
                 </div>
                 <span>Desenvolvido por João Victor Sobroza Dal Ross — 2026</span>
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

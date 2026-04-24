@@ -25,16 +25,26 @@
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">E-MAIL</label>
-                    <input type="email" class="form-control form-control-custom" id="email" name="email" placeholder="seu@email.com" required>
+                    <input type="email" class="form-control form-control-custom @error('email') is-invalid @enderror" id="email" name="email" placeholder="seu@email.com" required>
                 </div>
+                @error('email')
+                    <div class="invalid-feedback fw-bold" style="color: #ff4d4d;">
+                        {{ $message }}
+                    </div>
+                @enderror
                 <div class="mb-4">
                     <label for="password" class="form-label">SENHA</label>
-                    <input type="password" class="form-control form-control-custom" id="password" name="password" placeholder="••••••••" required>
+                    <input type="password" class="form-control form-control-custom @error('password') is-invalid @enderror" id="password" name="password" placeholder="••••••••" required>
                 </div>
                 <div class="d-grid gap-3">
                     <button type="submit" class="btn btn-primary text-uppercase fw-semibold" style="letter-spacing: 1px; font-size: 13px; border-radius: 0;">Logar</button>
                     <a href="{{ url('/register') }}" class="btn nav-cta text-decoration-none text-center d-block fw-semibold" style="letter-spacing: 1px; font-size: 13px;">Criar Conta</a>
                 </div>
+                @error('password')
+                    <div class="invalid-feedback fw-bold" style="color: #ff4d4d;">
+                        {{ $message }}
+                    </div>
+                @enderror
             </form>
         </div>
     </main>
