@@ -92,8 +92,10 @@ Route::middleware([CheckBarbeiro::class])->prefix('barbeiro')->name('barbeiro.')
     Route::get('/', function () {
         $barbeiro = Auth::user()->barbeiro;
         $servicos = Servico::where('id_barbeiro', $barbeiro->id)->get();
-        $agendamentos = Agendamento::where('id_barbeiro', $barbeiro->id)->get();
-
+        $agendamentos = Agendamento::where('id_barbeiro', $barbeiro->id)
+            ->where('status', '!=', 'cancelado') //ignorar os cancelados
+            ->orderByRaw("FIELD(status, 'confirmado', 'concluido')") //primeiro os confirmados, depois os concluídos
+            ->get();
         return view('barbeiro.index', [
             'servicos' => $servicos,
             'agendamentos' => $agendamentos,
@@ -108,8 +110,9 @@ Route::middleware([CheckCliente::class])->prefix('cliente')->name('cliente.')->g
 
     Route::get('/', function () {
         $cliente = Auth::user()->cliente;
-        $agendamentos = Agendamento::where('id_cliente', $cliente->id)->get();
-
+        $agendamentos = Agendamento::where('id_cliente', $cliente->id)
+            ->orderByRaw("FIELD(status, 'confirmado', 'concluido')") //primeiro os confirmados, depois os concluídos
+            ->get();
         return view('cliente.index', [
             'agendamentos' => $agendamentos,
         ]);
