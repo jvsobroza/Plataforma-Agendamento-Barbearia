@@ -1,9 +1,9 @@
-@extends('Barbeiro.layout')
+@extends('Servico.layout')
 
 @section('content')
     <div class="page-content container-fluid py-3">
         <a href="{{ route('servico.index') }}" class="btn btn-outline-secondary mb-4">
-            <i class="fas fa-arrow-left me-1"></i> Voltar ao Painel de Serviços
+            <i class="fas fa-arrow-left me-1"></i> Voltar ao Painel Principal
         </a>
         <div class="mb-4 d-flex justify-content-between align-items-center">
             <div>

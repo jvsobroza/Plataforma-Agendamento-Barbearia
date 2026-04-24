@@ -71,9 +71,14 @@ class ServicoController extends Controller
     public function update(UpdateServicoRequest $request, $id)
     {
         $servico = Servico::findOrFail($id);
-        $servico->update($request->all());
-
-
+        $barbeiroId = Auth::user()->barbeiro->id;
+        $tempoF = gmdate("H:i:s", $request->duracao * 60);
+        $servico->update([
+            'id_barbeiro' => $barbeiroId,
+            'descricao' => $request->descricao,
+            'preco' => $request->preco,
+            'duracao' => $tempoF,
+        ]);
         return redirect()->route('servico.index');
     }
 
