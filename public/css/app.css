@@ -392,3 +392,330 @@ body {
     font-size: 13px;
     letter-spacing: 0.5px;
 }
+/* ─── PAINEL GERAL ─────────────────────────────────────────── */
+.page-content {
+    color: #e0e0e0;
+}
+
+.page-content h1 {
+    color: #fff !important;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.page-content .lead {
+    color: #888 !important;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* ─── CARDS ─────────────────────────────────────────────────── */
+.card {
+    background: #1a1a1a !important;
+    border: 0.5px solid #2e2e2e !important;
+    border-radius: 0 !important;
+}
+
+.card-header {
+    background: #1e1e1e !important;
+    border-bottom: 0.5px solid #2e2e2e !important;
+    border-radius: 0 !important;
+}
+
+.card-header h5 {
+    color: #e0e0e0 !important;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ─── TABELAS ────────────────────────────────────────────────── */
+.table {
+    color: #ccc !important;
+    border-color: #2a2a2a !important;
+    font-size: 13px;
+}
+
+.table thead tr {
+    background: #161616;
+    border-bottom: 1px solid #333;
+}
+
+.table thead th {
+    color: #888 !important;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 14px 16px;
+    border: none !important;
+}
+
+.table tbody tr {
+    border-bottom: 0.5px solid #222 !important;
+    transition: background 0.15s;
+}
+
+.table tbody tr:hover {
+    background: #1f1f1f !important;
+}
+
+.table tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border: none !important;
+    color: #ccc;
+}
+
+.table-hover > tbody > tr:hover > * {
+    background-color: transparent !important;
+    color: #fff !important;
+}
+
+/* ─── BADGES ─────────────────────────────────────────────────── */
+.badge {
+    border-radius: 0 !important;
+    font-size: 10px !important;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 5px 10px !important;
+}
+
+.badge-status-confirmado {
+    background: rgba(201, 92, 10, 0.15);
+    color: #c95c0a;
+    border: 0.5px solid #c95c0a55;
+}
+
+.badge-status-concluido {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 0.5px solid #28a74555;
+}
+
+.badge-status-cancelado {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+    border: 0.5px solid #dc354555;
+}
+
+.badge-count {
+    background: transparent !important;
+    border: 0.5px solid #c95c0a55;
+    color: #c95c0a !important;
+    font-size: 10px !important;
+    letter-spacing: 1.5px;
+}
+
+.badge-servico {
+    background: #252525 !important;
+    color: #aaa !important;
+    border: 0.5px solid #333;
+}
+
+/* ─── BOTÕES ─────────────────────────────────────────────────── */
+.btn {
+    border-radius: 0 !important;
+    font-size: 11px !important;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: #c95c0a !important;
+    border-color: #c95c0a !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background: #e06810 !important;
+    border-color: #e06810 !important;
+}
+
+.btn-success {
+    background: transparent !important;
+    border: 1px solid #28a745 !important;
+    color: #28a745 !important;
+}
+
+.btn-success:hover {
+    background: #28a745 !important;
+    color: #fff !important;
+}
+
+.btn-outline-secondary {
+    border-color: #444 !important;
+    color: #888 !important;
+    background: transparent !important;
+}
+
+.btn-outline-secondary:hover {
+    background: #2a2a2a !important;
+    color: #ccc !important;
+    border-color: #555 !important;
+}
+
+.btn-outline-info {
+    border-color: #444 !important;
+    color: #888 !important;
+    background: transparent !important;
+}
+
+.btn-outline-info:hover {
+    background: #1f1f1f !important;
+    color: #c95c0a !important;
+    border-color: #c95c0a !important;
+}
+
+.btn-outline-primary {
+    border-color: #444 !important;
+    color: #888 !important;
+    background: transparent !important;
+}
+
+.btn-outline-primary:hover {
+    background: #1f1f1f !important;
+    color: #c95c0a !important;
+    border-color: #c95c0a !important;
+}
+
+.btn-outline-danger {
+    border-color: #444 !important;
+    color: #666 !important;
+    background: transparent !important;
+}
+
+.btn-outline-danger:hover {
+    background: rgba(220, 53, 69, 0.1) !important;
+    color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+
+.btn-danger {
+    background: transparent !important;
+    border: 1px solid #dc3545 !important;
+    color: #dc3545 !important;
+}
+
+.btn-danger:hover {
+    background: rgba(220, 53, 69, 0.15) !important;
+}
+
+/* ─── FORMULÁRIOS ────────────────────────────────────────────── */
+.form-control,
+.form-select {
+    background: #1e1e1e !important;
+    border: 1px solid #333 !important;
+    color: #ccc !important;
+    border-radius: 0 !important;
+    font-size: 13px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #222 !important;
+    border-color: #c95c0a !important;
+    color: #fff !important;
+    box-shadow: 0 0 0 2px rgba(201, 92, 10, 0.2) !important;
+}
+
+.form-control::placeholder {
+    color: #555 !important;
+}
+
+.form-label {
+    color: #888 !important;
+    font-size: 11px !important;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.input-group-text {
+    background: #252525 !important;
+    border: 1px solid #333 !important;
+    color: #666 !important;
+    border-radius: 0 !important;
+    font-size: 12px;
+}
+
+/* ─── ALERTS ─────────────────────────────────────────────────── */
+.alert {
+    border-radius: 0 !important;
+    border: none !important;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.alert-success {
+    background: rgba(40, 167, 69, 0.1) !important;
+    color: #28a745 !important;
+    border-left: 2px solid #28a745 !important;
+}
+
+.alert-danger {
+    background: rgba(220, 53, 69, 0.1) !important;
+    color: #dc3545 !important;
+    border-left: 2px solid #dc3545 !important;
+}
+
+/* ─── AVATAR DO SERVIÇO ──────────────────────────────────────── */
+.service-avatar {
+    width: 32px;
+    height: 32px;
+    background: rgba(201, 92, 10, 0.1);
+    border: 0.5px solid #c95c0a44;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.service-avatar i {
+    color: #c95c0a;
+    font-size: 12px;
+}
+
+/* ─── EMPTY STATE ────────────────────────────────────────────── */
+.empty-state {
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 2rem;
+    color: #333;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    color: #555;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* ─── DETAIL CARD (show) ─────────────────────────────────────── */
+.detail-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    font-size: 14px;
+    color: #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid #222;
+}
+
+.detail-value:last-of-type {
+    border-bottom: none;
+}
