@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agendamento extends Model
 {
-    protected $fillable = ['id_servico', 'id_barbeiro', 'id_cliente', 'data', 'status'];
+    protected $fillable = ['id_servico', 'id_barbeiro', 'id_cliente', 'data', 'hora', 'status'];
 
     public function servico(){
         return $this->belongsTo(Servico::class, 'id_servico', 'id');

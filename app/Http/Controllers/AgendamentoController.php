@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAgendamentoRequest;
 use App\Models\Barbeiro;
 use App\Models\Cliente;
 use App\Models\Servico;
+use Illuminate\Support\Facades\Auth;
 
 class AgendamentoController extends Controller
 {
@@ -16,8 +17,11 @@ class AgendamentoController extends Controller
      */
     public function index()
     {
-        $agendamento = Agendamento::latest()->paginate(5);
-        return view('agendamento.index', compact('agendamento'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $cliente = Auth::user()->cliente;
+        $agendamentos = Agendamento::where('id_cliente', $cliente->id)->get();
+        return view('cliente.index', [
+            'agendamentos' => $agendamentos
+        ]);
     }
 
     /**
@@ -26,9 +30,8 @@ class AgendamentoController extends Controller
     public function create()
     {
         $servico = Servico::all();
-        $barbeiro = Barbeiro::all();
-        $cliente = Cliente::all();
-        return view('agendamento.create', compact('servico', 'barbeiro', 'cliente'));
+        $barbeiro = Barbeiro::has('usuario')->with('usuario')->get();
+        return view('agendamento.create', compact('servico', 'barbeiro'));
     }
 
     /**
@@ -36,22 +39,48 @@ class AgendamentoController extends Controller
      */
     public function store(StoreAgendamentoRequest $request)
     {
-        $request->validate([
-            'data' => 'required',
-            'hora' => 'required',
-            'id_cliente' => 'required',
-        ]);
+        $dados = $request->validated();
+        $dados['id_cliente'] = Auth::user()->cliente->id;
+        $dados['status'] = 'confirmado';
+        $conflito = Agendamento::where('id_barbeiro', $dados['id_barbeiro'])
+            ->where('data', $dados['data'])
+            ->where('hora', $dados['hora'])
+            ->where('status', 'confirmado')
+            ->exists();
+        if ($conflito) {
+            return redirect()->back()
+                ->withErrors(['hora' => 'Este horário já está ocupado para este barbeiro.'])
+                ->withInput();
+        }
 
-        Agendamento::create($request->all());
-
-        return redirect()->route('agendamento.index')->with('success', 'Agendamento criado com sucesso.');
+        Agendamento::create($dados);
+        return redirect()->route('cliente.agendamento.index');
     }
-
     /**
      * Display the specified resource.
      */
-    public function show(Agendamento $agendamento)
+    public function show($id)
     {
+        $agendamento = Agendamento::find($id);
+
+        if (!$agendamento) {
+            return redirect()->back()->with('erro', 'Agendamento não encontrado!');
+        }
+
+        $user = Auth::user();
+
+        if ($user->tipo == 1) {
+            // Barbeiro: verifica se o agendamento pertence a ele
+            if ($user->barbeiro->id !== $agendamento->id_barbeiro) {
+                return redirect()->back()->with('erro', 'Você não tem permissão!');
+            }
+        } else {
+            // Cliente: verifica se o agendamento pertence a ele
+            if ($user->cliente->id !== $agendamento->id_cliente) {
+                return redirect()->back()->with('erro', 'Você não tem permissão!');
+            }
+        }
+
         return view('agendamento.show', compact('agendamento'));
     }
 
@@ -64,26 +93,31 @@ class AgendamentoController extends Controller
         $servico = Servico::all();
         $barbeiro = Barbeiro::all();
         $cliente = Cliente::all();
-        return view('agendamento.edit', compact('agendamento', 'servico', 'barbeiro', 'cliente'));}
+        return view('agendamento.edit', compact('agendamento', 'servico', 'barbeiro', 'cliente'));
+    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateAgendamentoRequest $request, Agendamento $agendamento)
     {
-       $agendamento = Agendamento::findOrFail($agendamento->id);
-        $agendamento->update($request->all());
+        $agendamento->update($request->validated());
 
-
-        return redirect()->route('agendamento.index');
+        return redirect()->route('barbeiro.agendamento.index');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
         Agendamento::destroy($id);
-        return redirect()->route('agendamento.index');
+
+        $user = Auth::user();
+
+        if ($user->tipo == 1) {
+            return redirect()->route('barbeiro.agendamento.index');
+        }
+
+        return redirect()->route('cliente.agendamento.index');
     }
 }

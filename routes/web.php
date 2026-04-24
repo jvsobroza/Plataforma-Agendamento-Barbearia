@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Auth;
 
 Route::resource('cliente', ClienteController::class);
 Route::resource('barbeiro', BarbeiroController::class);
-Route::resource('servico', ServicoController::class);
-Route::resource('agendamento', AgendamentoController::class);
 Route::resource('user', UserController::class);
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -44,9 +44,9 @@ Route::post('/login', function (Request $request) {
         $user = Auth::user();
 
         if ($user->tipo == 1) {
-            return redirect()->intended('/barbeiro/');
+            return redirect()->intended('/barbeiro');
         } else {
-            return redirect()->intended('/cliente/');
+            return redirect()->intended('/cliente');
         }
     }
 
@@ -57,6 +57,7 @@ Route::post('/login', function (Request $request) {
 
 Route::post('/registrar', function (StoreUserRequest $request) {
     $data = $request->validated();
+
     $user = User::create([
         'nome' => $data['nome'],
         'email' => $data['email'],
@@ -64,17 +65,18 @@ Route::post('/registrar', function (StoreUserRequest $request) {
         'tipo' => $data['tipo'],
     ]);
 
-    if ($user->tipo == 1) { //Barbeiro
+    if ($user->tipo == 1) {
         Barbeiro::create([
             'id_usuario' => $user->id,
             'telefone' => $data['telefone'],
         ]);
-    } else { //Cliente
+    } else {
         Cliente::create([
             'id_usuario' => $user->id,
             'endereco' => $data['endereco'],
         ]);
     }
+
     return redirect()->intended('/');
 });
 
@@ -85,26 +87,33 @@ Route::post('/logout', function (Request $request) {
     return redirect('/');
 })->name('logout');
 
-Route::middleware([CheckBarbeiro::class])->group(function () {
-    Route::get('/barbeiro', function () {
+Route::middleware([CheckBarbeiro::class])->prefix('barbeiro')->name('barbeiro.')->group(function () {
+
+    Route::get('/', function () {
         $barbeiro = Auth::user()->barbeiro;
         $servicos = Servico::where('id_barbeiro', $barbeiro->id)->get();
         $agendamentos = Agendamento::where('id_barbeiro', $barbeiro->id)->get();
+
         return view('barbeiro.index', [
             'servicos' => $servicos,
-            'agendamentos' => $agendamentos
+            'agendamentos' => $agendamentos,
         ]);
-    });
+    })->name('index');
+    Route::resource('agendamento', AgendamentoController::class)
+        ->except(['create', 'store']);
     Route::resource('servico', ServicoController::class);
-    Route::resource('agendamento', AgendamentoController::class)->except(['create', 'store']);
 });
-Route::middleware([CheckCliente::class])->group(function () {
-    Route::get('/cliente', function () {
+
+Route::middleware([CheckCliente::class])->prefix('cliente')->name('cliente.')->group(function () {
+
+    Route::get('/', function () {
         $cliente = Auth::user()->cliente;
         $agendamentos = Agendamento::where('id_cliente', $cliente->id)->get();
+
         return view('cliente.index', [
-            'agendamentos' => $agendamentos
+            'agendamentos' => $agendamentos,
         ]);
-    });
-    Route::resource('agendamento', AgendamentoController::class)->only(['create', 'store', 'index', 'show', 'destroy']);
+    })->name('index');
+    Route::resource('agendamento', AgendamentoController::class)
+        ->only(['create', 'store', 'index', 'show', 'destroy']);
 });

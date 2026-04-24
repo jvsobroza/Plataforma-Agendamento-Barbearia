@@ -24,10 +24,8 @@ class StoreAgendamentoRequest extends FormRequest
         return [
             'id_servico' => 'required|exists:servicos,id',
             'id_barbeiro' => 'required|exists:barbeiros,id',
-            'id_cliente' => 'required|exists:clientes,id',
             'data' => 'required|date|after_or_equal:today',
             'hora' => 'required|date_format:H:i',
-            'status' => 'required|string|max:20',
         ];
     }
 }

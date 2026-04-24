@@ -10,7 +10,7 @@ class Cliente extends Model
     protected $fillable = ['endereco', 'id_usuario'];
 
     public function usuario(){
-        return $this->belongsTo(User::class, 'id_usuario', 'id_cliente');
+        return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
     public function agendamentos(){
         return $this->hasMany('App\Models\Agendamento', 'id_cliente', 'id');

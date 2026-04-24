@@ -44,7 +44,7 @@ class ServicoController extends Controller
             'preco' => $request->preco,
             'duracao' => $tempoF,
         ]);
-        return redirect()->route('servico.index');
+        return redirect()->route('barbeiro.servico.index');
     }
 
     /**
@@ -79,7 +79,7 @@ class ServicoController extends Controller
             'preco' => $request->preco,
             'duracao' => $tempoF,
         ]);
-        return redirect()->route('servico.index');
+        return redirect()->route('barbeiro.servico.index');
     }
 
     /**
@@ -88,6 +88,6 @@ class ServicoController extends Controller
     public function destroy($id)
     {
         Servico::destroy($id);
-        return redirect()->route('servico.index');
+        return redirect()->route('barbeiro.servico.index');
     }
 }
