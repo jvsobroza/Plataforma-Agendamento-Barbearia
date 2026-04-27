@@ -70,11 +70,11 @@ class AgendamentoController extends Controller
         $user = Auth::user();
 
         if ($user->tipo == 1) {
-            if ($user->barbeiro->id !== $agendamento->id_barbeiro) {
+            if ($user->barbeiro->id != $agendamento->id_barbeiro) {
                 return redirect()->back()->with('erro', 'Você não tem permissão!');
             }
         } else {
-            if ($user->cliente->id !== $agendamento->id_cliente) {
+            if ($user->cliente->id != $agendamento->id_cliente) {
                 return redirect()->back()->with('erro', 'Você não tem permissão!');
             }
         }
