@@ -93,7 +93,6 @@
 
         const data = new Date(dataVal + 'T00:00:00');
         const dia  = data.getDay(); 
-
         if (dia === 0) {
             alert('Não atendemos aos domingos. Por favor escolha outra data.');
             this.value    = '';
@@ -102,7 +101,6 @@
             horaInput.value = '';
             return;
         }
-
         if (dia === 6) {
             horaInput.min = '09:00';
             horaInput.max = '18:00';
@@ -112,7 +110,6 @@
             }
             return;
         }
-
         horaInput.min = '09:00';
         horaInput.max = '20:00';
 
@@ -120,28 +117,22 @@
             horaInput.value = '';
         }
     });
-
     document.querySelector('form').addEventListener('submit', function (e) {
         const dataVal  = document.getElementById('data').value;
         const horaVal  = document.getElementById('hora').value;
-
         if (!dataVal || !horaVal) return;
-
         const dia  = new Date(dataVal + 'T00:00:00').getDay();
         const hora = horaVal;
-
         if (dia === 0) {
             e.preventDefault();
             alert('Não atendemos aos domingos.');
             return;
         }
-
         if (dia === 6 && (hora < '09:00' || hora > '18:00')) {
             e.preventDefault();
             alert('Aos sábados atendemos das 09h às 18h.');
             return;
         }
-
         if (dia !== 6 && (hora < '09:00' || hora > '20:00')) {
             e.preventDefault();
             alert('De segunda a sexta atendemos das 09h às 20h.');

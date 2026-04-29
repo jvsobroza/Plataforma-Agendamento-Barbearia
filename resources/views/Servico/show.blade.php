@@ -1,4 +1,3 @@
-{{-- show.blade.php --}}
 @extends('servico.layout')
 
 @section('content')
@@ -12,6 +11,20 @@
         <p class="mb-1" style="font-size:11px; letter-spacing:3px; color:#c95c0a; text-transform:uppercase;">Serviço</p>
         <h1><i class="fas fa-concierge-bell me-2" style="color:#c95c0a;"></i>{{ $servico->descricao }}</h1>
     </div>
+
+    
+    @if(session('erro'))
+        <div class="alert alert-danger mb-4">
+            <i class="fas fa-times-circle me-2"></i>{{ session('erro') }}
+        </div>
+    @endif
+
+    @session('success')
+        <div class="alert alert-success mb-4">
+            <i class="fas fa-check-circle me-2"></i>{{ $value }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endsession
 
     <div class="card" style="max-width: 480px;">
         <div class="card-body p-4">

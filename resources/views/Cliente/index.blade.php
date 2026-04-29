@@ -1,5 +1,4 @@
 @extends('cliente.layout')
-
 @section('content')
 <div class="page-content container-fluid py-4">
 
@@ -25,6 +24,7 @@
     @session('success')
         <div class="alert alert-success mb-4">
             <i class="fas fa-check-circle me-2"></i>{{ $value }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endsession
 
@@ -67,7 +67,7 @@
                                         {{ date('H:i', strtotime($agenda->hora)) }}
                                     </td>
                                     <td style="color:#c95c0a; font-weight:600;">
-                                        R$ {{ number_format($agenda->servico->preco ?? 0, 2, ',', '.') }}
+                                        R$ {{ $agenda->servico->preco  }}
                                     </td>
                                     <td class="text-center">
                                         <span class="badge badge-status-{{ $agenda->status }}">
@@ -80,6 +80,16 @@
                                                 class="btn btn-outline-info btn-sm" title="Detalhes">
                                                 <i class="fas fa-eye"></i>
                                             </a>
+                                            @if($agenda->status == 'confirmado')
+                                                <form action="{{ route('cliente.agendamento.destroy', $agenda->id) }}" method="POST" 
+                                                onsubmit="return confirm('Tem certeza que deseja cancelar este agendamento?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Cancelar Agendamento">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

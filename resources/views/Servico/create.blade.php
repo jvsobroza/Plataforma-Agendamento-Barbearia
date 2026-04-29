@@ -1,4 +1,3 @@
-{{-- create.blade.php --}}
 @extends('servico.layout')
 
 @section('content')

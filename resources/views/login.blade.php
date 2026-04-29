@@ -6,6 +6,7 @@
     <title>Login - Barbearia Xurupis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/logo_xurupis.png') }}">
 </head>
 <body>
     <nav class="nav navbar navbar-dark">
@@ -23,15 +24,19 @@
             <h3 class="text-center mb-4 text-white" style="letter-spacing: 1px;">Acesse sua Conta</h3>
             <form action="{{ url('/login') }}" method="POST">
                 @csrf
+                @if ($errors->any())
+                    <div class="alert alert-danger p-2" style="font-size: 13px;">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="mb-3">
                     <label for="email" class="form-label">E-MAIL</label>
                     <input type="email" class="form-control form-control-custom @error('email') is-invalid @enderror" id="email" name="email" placeholder="seu@email.com" required>
                 </div>
-                @error('email')
-                    <div class="invalid-feedback fw-bold" style="color: #ff4d4d;">
-                        {{ $message }}
-                    </div>
-                @enderror
                 <div class="mb-4">
                     <label for="password" class="form-label">SENHA</label>
                     <input type="password" class="form-control form-control-custom @error('password') is-invalid @enderror" id="password" name="password" placeholder="••••••••" required>
@@ -40,11 +45,6 @@
                     <button type="submit" class="btn btn-primary text-uppercase fw-semibold" style="letter-spacing: 1px; font-size: 13px; border-radius: 0;">Logar</button>
                     <a href="{{ url('/register') }}" class="btn nav-cta text-decoration-none text-center d-block fw-semibold" style="letter-spacing: 1px; font-size: 13px;">Criar Conta</a>
                 </div>
-                @error('password')
-                    <div class="invalid-feedback fw-bold" style="color: #ff4d4d;">
-                        {{ $message }}
-                    </div>
-                @enderror
             </form>
         </div>
     </main>
