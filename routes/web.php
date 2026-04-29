@@ -111,7 +111,7 @@ Route::middleware([CheckCliente::class])->prefix('cliente')->name('cliente.')->g
     Route::get('/', function () {
         $cliente = Auth::user()->cliente;
         $agendamentos = Agendamento::where('id_cliente', $cliente->id)
-            ->orderByRaw("FIELD(status, 'confirmado', 'concluido')") //primeiro os confirmados, depois os concluídos
+            ->orderByRaw("FIELD(status, 'confirmado', 'concluido', 'cancelado')") //primeiro os confirmados, depois os concluídos
             ->get();
         return view('cliente.index', [
             'agendamentos' => $agendamentos,

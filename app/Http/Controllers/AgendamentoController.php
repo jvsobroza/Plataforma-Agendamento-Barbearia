@@ -52,10 +52,10 @@ class AgendamentoController extends Controller
                 ->withErrors(['hora' => 'Este horário já está ocupado para este barbeiro.'])
                 ->withInput();
         }
-
+        
         Agendamento::create($dados);
-        return redirect()->route('cliente.index');
-    }
+        return redirect()->route('cliente.index')
+        ->with('success', 'Agendamento criado com sucesso!');    }
     /**
      * Display the specified resource.
      */
@@ -101,21 +101,18 @@ class AgendamentoController extends Controller
     {
         $agendamento->update(['status' => $request->status]);
 
-        return redirect()->route('barbeiro.index', $agendamento->id);
+        return redirect()->route('barbeiro.index', $agendamento->id)->with('success', 'Agendamento editado com sucesso!');
     }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        Agendamento::destroy($id);
+        $agendamento = Agendamento::findOrFail($id);
+        $agendamento->update([
+        'status' => 'cancelado'
+        ]);
 
-        $user = Auth::user();
-
-        if ($user->tipo == 1) {
-            return redirect()->route('barbeiro.agendamento.index');
-        }
-
-        return redirect()->route('cliente.agendamento.index');
+    return redirect()->back()->with('success', 'Agendamento cancelado com sucesso!');
     }
 }
