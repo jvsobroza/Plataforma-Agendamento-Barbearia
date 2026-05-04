@@ -24,7 +24,9 @@
             <i class="fas fa-check-circle me-2"></i>{{ $value }}
         </div>
     @endsession
-
+<a href="{{ route('barbeiro.relatorio') }}" class="btn btn-outline-secondary mb-4">
+    <i class="fas fa-file-pdf me-1"></i> Gerar Relatório PDF
+</a>
     {{-- SERVIÇOS --}}
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center px-4 py-3">

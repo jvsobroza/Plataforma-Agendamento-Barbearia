@@ -5,6 +5,7 @@ use App\Http\Controllers\BarbeiroController;
 use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RelatorioController;
 use App\Http\Middleware\CheckBarbeiro;
 use App\Http\Middleware\CheckCliente;
 use App\Http\Requests\StoreUserRequest;
@@ -104,6 +105,7 @@ Route::middleware([CheckBarbeiro::class])->prefix('barbeiro')->name('barbeiro.')
     Route::resource('agendamento', AgendamentoController::class)
         ->except(['create', 'store']);
     Route::resource('servico', ServicoController::class);
+    Route::get('/barbeiro/relatorios', [RelatorioController::class, 'relatorioAgendamentos'])->name('relatorio');
 });
 
 Route::middleware([CheckCliente::class])->prefix('cliente')->name('cliente.')->group(function () {
