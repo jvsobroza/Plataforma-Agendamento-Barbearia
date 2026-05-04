@@ -1,37 +1,46 @@
 # ✂️ Xurupis — Plataforma de Agendamento para Barbearia
 
-Plataforma web desenvolvida para gerenciamento completo de uma barbearia, permitindo que clientes agendem serviços online e barbeiros gerenciem sua agenda e serviços oferecidos.
+Plataforma web desenvolvida para gerenciamento completo de uma barbearia, permitindo que clientes agendem serviços online e barbeiros gerenciem sua agenda, serviços e performance financeira.
 
 ---
 
 ## 📋 Sobre o Projeto
 
-O sistema **Xurupis** é uma aplicação full-stack construída com Laravel 10, voltada para barbearias que desejam digitalizar seu processo de agendamento. A plataforma possui dois perfis de acesso distintos — **barbeiro** e **cliente** — cada um com seu próprio painel e funcionalidades.
+O sistema **Xurupis** é uma aplicação full-stack construída com Laravel 10. A plataforma possui dois perfis de acesso distintos — **barbeiro** e **cliente** — focando na facilidade de agendamento e no controle administrativo robusto para o profissional.
 
 ---
 
 ## 🚀 Funcionalidades
 
 ### Cliente
-- Cadastro e autenticação
-- Agendamento de serviços com escolha de barbeiro, serviço, data e hora
-- Visualização dos próprios agendamentos
-- Validação de horários conforme funcionamento da barbearia
+- Cadastro e autenticação.
+- Agendamento de serviços com escolha de barbeiro, serviço, data e hora.
+- Visualização do histórico de agendamentos.
+- Validação de horários conforme funcionamento da barbearia.
 
 ### Barbeiro
-- Cadastro e autenticação
-- Gerenciamento de serviços (criar, editar, visualizar, excluir)
-- Visualização de todos os agendamentos recebidos
-- Atualização de status dos agendamentos (Confirmado / Concluído / Cancelado)
-- Agendamentos ordenados por status (confirmados primeiro, concluídos por último)
+- Painel administrativo com gerenciamento de serviços (CRUD).
+- Controle de agenda: Atualização de status (Confirmado / Concluído / Cancelado).
+- **Módulo de Relatórios**: Geração de documentos PDF profissionais.
+- **Inteligência de Negócio**: Visualização de faturamento total, serviços mais populares e evolução mensal de agendamentos.
 
 ### Regras de Negócio
-- Prevenção de conflito de horários (mesmo barbeiro, mesma data e hora)
+- Prevenção de conflito de horários (mesmo barbeiro, mesma data e hora).
 - Validação de horário de funcionamento:
   - Segunda a Sexta: 09h às 20h
   - Sábado: 09h às 18h
   - Domingo: Fechado
-- Agendamentos cancelados não são exibidos nas listagens
+- Ordenação inteligente: agendamentos ativos e confirmados aparecem no topo da listagem.
+
+---
+
+## 📊 Módulo de Relatórios
+
+O sistema conta com uma funcionalidade de exportação para PDF (DomPDF) que inclui:
+- **Resumo Financeiro**: Cálculo automático de faturamento baseado em agendamentos concluídos e confirmados.
+- **Ranking de Serviços**: Identificação dos serviços mais realizados por volume.
+- **Análise Temporal**: Agrupamento de produtividade por mês e ano.
+- **Design Profissional**: Relatório formatado com status coloridos e layout administrativo limpo.
 
 ---
 
@@ -40,7 +49,8 @@ O sistema **Xurupis** é uma aplicação full-stack construída com Laravel 10, 
 - **PHP 8.1+**
 - **Laravel 10**
 - **MySQL**
-- **Blade** (template engine)
+- **DomPDF** (Geração de relatórios)
+- **Blade** (Template Engine)
 - **Bootstrap 5.3**
 
 ---
@@ -51,7 +61,6 @@ O sistema **Xurupis** é uma aplicação full-stack construída com Laravel 10, 
 - PHP >= 8.1
 - Composer
 - MySQL
-- Laragon (recomendado)
 
 ### Passo a passo
 
@@ -116,12 +125,9 @@ app/
 │   │   ├── ClienteController.php
 │   │   ├── ServicoController.php
 │   │   └── UserController.php
-│   ├── Middleware/
-│   │   ├── CheckBarbeiro.php
-│   │   └── CheckCliente.php
-│   └── Requests/
-│       ├── StoreAgendamentoRequest.php
-│       └── UpdateAgendamentoRequest.php
+│   └── Middleware/
+│       ├── CheckBarbeiro.php
+│       └── CheckCliente.php
 ├── Models/
 │   ├── Agendamento.php
 │   ├── Barbeiro.php
@@ -131,6 +137,8 @@ app/
 resources/
 └── views/
     ├── barbeiro/
+    │    └── relatorios/
+    │       └── relatorio.blade.php  # Template do PDF
     ├── cliente/
     ├── agendamento/
     └── servico/
