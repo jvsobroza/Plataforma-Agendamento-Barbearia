@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <nav class="nav navbar navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand nav-logo" href="{{ url('/servico') }}">
+            <a class="navbar-brand nav-logo" href="{{ url('/barbeiro') }}">
                 <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis" class="rounded-circle"></div>
                 <span class="logo-name">XURUPIS <span style="font-size: 12px; color: #c95c0a;">| BARBEIRO/SERVIÇOS</span></span>
             </a>

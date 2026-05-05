@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,25 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/logo_xurupis.png') }}">
 </head>
+
 <body class="d-flex flex-column min-vh-100">
     <!-- Navbar -->
     <nav class="nav navbar navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand nav-logo" href="{{ url('/agendamento') }}">
-                <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis" class="rounded-circle"></div>
-                <span class="logo-name">XURUPIS <span style="font-size: 12px; color: #c95c0a;">| AGENDAMENTOS</span></span>
+            <a class="navbar-brand nav-logo" @if (auth()->check() && auth()->user()->tipo == 1)
+            href="{{ url('/barbeiro') }}"> @endif
+                @if (auth()->check() && auth()->user()->tipo == 2) href="{{ url('/cliente') }}"> @endif
+                <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis"
+                        class="rounded-circle"></div>
+                @if (auth()->check())
+                    @if (auth()->user()->tipo == 1)
+                        <span class="logo-name">XURUPIS <span style="font-size: 12px; color: #c95c0a;">|
+                                BARBEIRO/AGENDAMENTOS</span></span>
+                    @elseif (auth()->user()->tipo == 2)
+                        <span class="logo-name">XURUPIS <span style="font-size: 12px; color: #c95c0a;">|
+                                CLIENTE/AGENDAMENTOS</span></span>
+                    @endif
+                @endif
             </a>
             @auth
                 <div class="d-flex align-items-center gap-4">
@@ -43,7 +56,8 @@
         <div class="container">
             <div class="footer-bottom d-flex justify-content-between align-items-center">
                 <div class="nav-logo">
-                    <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis" class="rounded-circle"></div>
+                    <div class="logo-circle"><img src="{{ asset('assets/logo_xurupis.png') }}" alt="Logo Xurupis"
+                            class="rounded-circle"></div>
                     <span class="logo-name">XURUPIS</span>
                 </div>
                 <span>Desenvolvido por João Victor Sobroza Dal Ross — 2026</span>
